@@ -6,6 +6,8 @@ public class Door : MonoBehaviour
 {
     SpriteRenderer sprite;
     public bool isCorrect;
+    public bool isRevealed;
+    public bool isPicked;
     // Start is called before the first frame update
     void Start()
     {
