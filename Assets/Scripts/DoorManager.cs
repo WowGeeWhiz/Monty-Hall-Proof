@@ -15,6 +15,8 @@ public class DoorManager : MonoBehaviour
     public TextMeshProUGUI swapStat;
     public TextMeshProUGUI stickStat;
     public TextMeshProUGUI swapDisplay;
+    public TextMeshProUGUI oddsDisplay;
+    public TextMeshProUGUI proofStatement;
     int pickedDoor;
     int swappedCorrect;
     int stickedCorrect;
@@ -39,17 +41,18 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-    public void StartTest()
+    public void StartTest(int testTimes = 500)
     {
         swappedCorrect = 0;
         stickedCorrect = 0;
         swappedTestMax = 0;
         stickedTestMax = 0;
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < testTimes; i++)
         {
             TestCycle(false);
             TestCycle(true);
         }
+        proofStatement.gameObject.SetActive(true);
     }
 
     public void TestCycle(bool swap)
@@ -89,6 +92,20 @@ public class DoorManager : MonoBehaviour
     {
         swapStat.text = $"{swappedCorrect}/{swappedTestMax}";
         stickStat.text = $"{stickedCorrect}/{stickedTestMax}";
+        float swapFloat;
+        if (swappedTestMax != 0) swapFloat = (float)swappedCorrect / (float)swappedTestMax;
+        else swapFloat = 0;
+        float stickFloat;
+        if (stickedTestMax != 0) stickFloat = (float)stickedCorrect / (float)stickedTestMax;
+        else stickFloat = 0;
+        Debug.Log("before x100: " + swapFloat);
+        swapFloat *= 100;
+        stickFloat *= 100;
+        Debug.Log("before round: " + swapFloat);
+        swapFloat = Mathf.Round(swapFloat);
+        stickFloat = Mathf.Round(stickFloat);
+        Debug.Log("after round: " + swapFloat);
+        oddsDisplay.text = $"Success probability: {swapFloat}%\nSuccess probability: {stickFloat}%";
     }
 
     void RevealCorrect()
