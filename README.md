@@ -3,4 +3,4 @@
 
  As is demonstrated in this program, there is almost always a much higher success rate when swapping after some of the incorrect doors are revealed than there is when you do not swap your selection.
 
- This is a project for a KSU course.
+This is built within Unity and is not a standalone build.
